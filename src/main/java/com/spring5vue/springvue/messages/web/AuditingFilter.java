@@ -1,4 +1,4 @@
-package com.spring5vue.springvue.messages;
+package com.spring5vue.springvue.messages.web;
 
 import org.springframework.web.filter.GenericFilterBean;
 

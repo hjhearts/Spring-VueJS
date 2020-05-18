@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message App</title>
+    <style>
+        [v-cloak]{display:none}
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <message-list :items="messages" @delete="deleteMessage"></message-list>
+        <form @submit.prevent="addMessage">
+            <textarea v-model="newMessage" v-focus></textarea>
+            <button type="submit">ADD</button>
+        </form>
+    </div>
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+<script type="module">
+    import "./directives/focus.directive.js"
+    import MessageList from "./components/MessageList.js";
+    let va = new Vue({
+        el:'#app',
+        data:{
+            messages:[],
+            newMessage:''
+        },
+        components:{
+            MessageList
+        },
+        methods:{
+            addMessage(e){
+                this.messages.push({text:this.newMessage, createdAt:new Date()});
+                this.newMessage = ''
+            },
+            deleteMessage(message){
+                this.messages.splice(this.messages.indexOf(message), 1);
+            }
+        }
+    })
+</script>
+</body>
+</html>
